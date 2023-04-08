@@ -7,6 +7,8 @@ using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using NUnit.Framework.Interfaces;
 using CSharpSeleniumFramework.src.test.net.Tests;
+using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 
 namespace CSharpSeleniumFramework.src.main.net.Utilities
 {
@@ -63,6 +65,13 @@ namespace CSharpSeleniumFramework.src.main.net.Utilities
                 case "chrome":
                     driver.Value = new ChromeDriver();
                     break;
+
+                case "brave":
+                    ChromeOptions options = new ChromeOptions();
+                    options.BinaryLocation = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
+                    driver.Value = new ChromeDriver(options);
+                    break;
+
             }
         }
 
