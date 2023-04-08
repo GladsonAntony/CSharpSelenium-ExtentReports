@@ -55,11 +55,29 @@ namespace CSharpSeleniumFramework.src.main.net.Utilities
             switch (BrowserName.ToLower())
             {
                 case "firefox":
-                    driver.Value = new FirefoxDriver();
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower().Equals("true"))
+                    {
+                        FirefoxOptions firefoxOptions = new FirefoxOptions();
+                        firefoxOptions.AddArguments("--headless");
+                        driver.Value = new FirefoxDriver(firefoxOptions);
+                    }
+                    else
+                    {
+                        driver.Value = new FirefoxDriver();
+                    }
                     break;
 
                 case "edge":
-                    driver.Value = new EdgeDriver();
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
+                    {
+                        EdgeOptions edgeOptions = new EdgeOptions();
+                        edgeOptions.AddArguments("--headless");
+                        driver.Value = new EdgeDriver(edgeOptions);
+                    }
+                    else
+                    {
+                        driver.Value = new EdgeDriver();
+                    }
                     break;
 
                 case "chrome":
@@ -68,7 +86,7 @@ namespace CSharpSeleniumFramework.src.main.net.Utilities
 
                 case "brave":
                     ChromeOptions options = new ChromeOptions();
-                    options.BinaryLocation = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
+                    options.BinaryLocation = ConfigurationManager.AppSettings["BrowserPath"];
                     driver.Value = new ChromeDriver(options);
                     break;
 

@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Hardware.Info" Version="11.0.0" />
 		<PackageReference Include="Selenium.Support" Version="4.8.2" />
 		<PackageReference Include="Selenium.WebDriver" Version="4.8.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />

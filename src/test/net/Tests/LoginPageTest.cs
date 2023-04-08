@@ -43,7 +43,7 @@ namespace CSharpSeleniumFramework.src.test.net.Tests
             Thread.Sleep(5000);
         }
 
-        [TestCaseSource("AddTestDataConfig")]
+        [TestCaseSource(nameof(AddTestDataConfig))]
         //[Parallelizable(ParallelScope.All)]
         public void LoginPageDemo4(string username, string password)
         {
