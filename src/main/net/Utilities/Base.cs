@@ -7,8 +7,6 @@ using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using NUnit.Framework.Interfaces;
 using CSharpSeleniumFramework.src.test.net.Tests;
-using System.Net.NetworkInformation;
-using System.Reflection.Metadata;
 
 namespace CSharpSeleniumFramework.src.main.net.Utilities
 {
@@ -81,15 +79,66 @@ namespace CSharpSeleniumFramework.src.main.net.Utilities
                     break;
 
                 case "chrome":
-                    driver.Value = new ChromeDriver();
+                    
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.AddArguments("--headless");
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    else
+                    {
+                        driver.Value = new ChromeDriver();
+                    }
                     break;
 
-                case "brave":
-                    ChromeOptions options = new ChromeOptions();
-                    options.BinaryLocation = ConfigurationManager.AppSettings["BrowserPath"];
-                    driver.Value = new ChromeDriver(options);
+                case "brave":                    
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.AddArguments("--headless");
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["BravePath"];
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    else
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["BravePath"];
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
                     break;
 
+                case "opera":
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["OperaPath"];
+                        chromeOptions.AddArguments("--headless");
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    else
+                    {                         
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["OperaPath"];
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    break;
+
+                case "chromium":
+                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["ChromiumPath"];
+                        chromeOptions.AddArguments("--headless");
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    else
+                    {
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["ChromiumPath"];
+                        driver.Value = new ChromeDriver(chromeOptions);
+                    }
+                    break;
             }
         }
 
