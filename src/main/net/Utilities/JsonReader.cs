@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace CSharpSeleniumFramework.src.test.net.Tests
+namespace CSharpSeleniumExtent.src.main.net.Utilities
 {
     public class JsonReader
     {

@@ -2,7 +2,7 @@
 using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using OpenQA.Selenium.Support.UI;
-using CSharpSeleniumFramework.src.main.net.Utilities;
+using CSharpSeleniumFramework.src.main.net.Core;
 
 namespace CSharpSeleniumFramework.src.test.net.PageObjects
 {

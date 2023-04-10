@@ -6,16 +6,14 @@ using System.Configuration;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using NUnit.Framework.Interfaces;
-using CSharpSeleniumFramework.src.test.net.Tests;
+using CSharpSeleniumExtent.src.main.net.Core;
+using CSharpSeleniumExtent.src.main.net.Utilities;
 
-namespace CSharpSeleniumFramework.src.main.net.Utilities
+namespace CSharpSeleniumFramework.src.main.net.Core
 {
-    public class Base
-    {
-        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
-        string ConfigBrowserName;
-        ExtentReports extentReports;
-        ExtentTest extentTest;
+    public class Base : InitalizeMethod
+
+    {       
 
         [OneTimeSetUp]
         public void Setup()
@@ -24,11 +22,12 @@ namespace CSharpSeleniumFramework.src.main.net.Utilities
             Console.WriteLine(WorkingDirectory);
             string ProjectDirectory = Directory.GetParent(WorkingDirectory).Parent.Parent.FullName;
             Console.WriteLine(ProjectDirectory);
-            string ReportPath = ProjectDirectory + "//Index.html";
+            string ReportPath = ProjectDirectory + "//src//test//resources//Reports//index.html";
             var HtmlReporter = new ExtentHtmlReporter(ReportPath);
             extentReports = new ExtentReports();
             extentReports.AttachReporter(HtmlReporter);
             extentReports.AddSystemInfo("Username", "Gladson Antony");
+            extentReports.AddSystemInfo("OS Version", OperationSystem1 );
         }
 
 

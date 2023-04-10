@@ -62,6 +62,9 @@ csharp_style_unused_value_expression_statement_preference = discard_variable:sil
 # CA1305: Specify IFormatProvider
 dotnet_diagnostic.CA1305.severity = none
 
+# IDE0005: Using directive is unnecessary.
+dotnet_diagnostic.IDE0005.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

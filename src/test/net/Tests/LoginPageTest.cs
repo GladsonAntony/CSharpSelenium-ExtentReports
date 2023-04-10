@@ -1,6 +1,5 @@
-﻿using CSharpSeleniumFramework.src.test.net.PageObjects;
-using NUnit.Framework;
-using CSharpSeleniumFramework.src.main.net.Utilities;
+﻿using CSharpSeleniumFramework.src.main.net.Core;
+using CSharpSeleniumFramework.src.test.net.PageObjects;
 
 namespace CSharpSeleniumFramework.src.test.net.Tests
 {

@@ -2,7 +2,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using System.Collections;
 using NUnit.Framework;
-using CSharpSeleniumFramework.src.main.net.Utilities;
+using CSharpSeleniumFramework.src.main.net.Core;
 
 namespace CSharpSeleniumFramework.src.test.net.Tests
 {
