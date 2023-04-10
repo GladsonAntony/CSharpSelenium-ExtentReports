@@ -33,13 +33,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="src\test\net\Tests\TestData.json">
+	  <None Update="src\test\resources\TestData\TestData.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="src\test\resources\TestData\" />
 	  <Folder Include="src\test\resources\Reports\" />
 	</ItemGroup>
 

@@ -18,16 +18,11 @@ namespace CSharpSeleniumFramework.src.main.net.Core
         [OneTimeSetUp]
         public void Setup()
         {
-            string WorkingDirectory = Environment.CurrentDirectory;
-            Console.WriteLine(WorkingDirectory);
-            string ProjectDirectory = Directory.GetParent(WorkingDirectory).Parent.Parent.FullName;
-            Console.WriteLine(ProjectDirectory);
-            string ReportPath = ProjectDirectory + "//src//test//resources//Reports//index.html";
+            
             var HtmlReporter = new ExtentHtmlReporter(ReportPath);
             extentReports = new ExtentReports();
             extentReports.AttachReporter(HtmlReporter);
             extentReports.AddSystemInfo("Username", "Gladson Antony");
-            extentReports.AddSystemInfo("OS Version", OperationSystem1 );
         }
 
 
@@ -41,9 +36,9 @@ namespace CSharpSeleniumFramework.src.main.net.Core
                 ConfigBrowserName = ConfigurationManager.AppSettings["Browser"];
             }
             InitBrowser(ConfigBrowserName);
-            driver.Value.Manage().Window.Maximize();
-            driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Value.Url = ConfigurationManager.AppSettings["URL"];
+            GetDriver().Manage().Window.Maximize();
+            GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            GetDriver().Url = ConfigurationManager.AppSettings["URL"];
             TestContext.WriteLine("Title of the Webpage " + driver.Value.Title);
         }
 
