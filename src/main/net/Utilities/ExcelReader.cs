@@ -12,11 +12,9 @@ namespace CSharpSeleniumExtent.src.main.net.Utilities
     public class ExcelReader : InitializeMethod
     {
         public IEnumerable<TestCaseData> ReadFromExcel(String excelFileName, String excelsheetName)
-        {            
+        {
             string excelLocation = Path.Combine(TestDataPath + excelFileName + ".xlsx");
-
             string cmdText = "SELECT * FROM [" + excelsheetName + "$]";
-
             if (!File.Exists(excelLocation))
                 throw new Exception(string.Format("File name: {0}", excelLocation), new FileNotFoundException());
 
@@ -46,4 +44,3 @@ namespace CSharpSeleniumExtent.src.main.net.Utilities
         }
     }
 }
-

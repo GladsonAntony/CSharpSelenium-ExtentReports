@@ -1,4 +1,7 @@
-﻿using CSharpSeleniumExtent.src.main.net.Utilities;
+﻿using AventStack.ExtentReports;
+using CSharpSeleniumExtent.src.main.net.Core;
+using CSharpSeleniumExtent.src.main.net.Utilities;
+using CSharpSeleniumFramework.src.main.net.Core;
 using CSharpSeleniumFramework.src.test.net.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CSharpSeleniumExtent.src.test.net.Tests
 {
-    public class DynamicTestDataExample
+    public class DynamicTestDataExample : Base
     {
         public static IEnumerable<TestCaseData> ReadDataFromJSON()
         {
@@ -23,7 +26,9 @@ namespace CSharpSeleniumExtent.src.test.net.Tests
         {
             TestContext.WriteLine("To Demo the use of Dynamically reading the JSON Test Data and Printing the values");
             TestContext.WriteLine(username);
+            ExtentReporter.LogInfo($"Provided Username : {username}");
             TestContext.WriteLine(password);
+            ExtentReporter.LogInfo($"Provided Password : {password}");
         }
 
 

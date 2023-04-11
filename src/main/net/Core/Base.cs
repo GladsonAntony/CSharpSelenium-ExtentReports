@@ -11,14 +11,13 @@ using CSharpSeleniumExtent.src.main.net.Utilities;
 
 namespace CSharpSeleniumFramework.src.main.net.Core
 {
-    public class Base : InitializeMethod
+    public class Base : ExtentReporter
 
     {       
 
         [OneTimeSetUp]
         public void Setup()
-        {
-            
+        {            
             var HtmlReporter = new ExtentHtmlReporter(ReportPath);
             extentReports = new ExtentReports();
             extentReports.AttachReporter(HtmlReporter);
@@ -38,7 +37,7 @@ namespace CSharpSeleniumFramework.src.main.net.Core
             InitBrowser(ConfigBrowserName);
             GetDriver().Manage().Window.Maximize();
             GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            GetDriver().Url = ConfigurationManager.AppSettings["URL"];
+            GetDriver().Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
             TestContext.WriteLine("Title of the Webpage " + driver.Value.Title);
         }
 
@@ -141,10 +140,6 @@ namespace CSharpSeleniumFramework.src.main.net.Core
             return driver.Value;
         }
 
-        public static JsonReader getDataParser()
-        {
-            return new JsonReader();
-        }
 
         [TearDown]
         public void Teardown()

@@ -28,3 +28,12 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "member",
     Target = "~F:CSharpSeleniumFramework.PageObjects.ProductsPageObjects.driver"
     )]
+
+[assembly: SuppressMessage
+    (
+    "Interoperability",
+    "CA1416: Validate platform compatibility",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~F:CSharpSeleniumExtent.src.main.net.Utilities.ExcelReader"
+    )]

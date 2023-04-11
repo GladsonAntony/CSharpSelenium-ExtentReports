@@ -1,4 +1,5 @@
-﻿using CSharpSeleniumFramework.src.main.net.Core;
+﻿using CSharpSeleniumExtent.src.main.net.Utilities;
+using CSharpSeleniumFramework.src.main.net.Core;
 using CSharpSeleniumFramework.src.test.net.PageObjects;
 
 namespace CSharpSeleniumFramework.src.test.net.Tests
@@ -58,9 +59,10 @@ namespace CSharpSeleniumFramework.src.test.net.Tests
 
         public static IEnumerable<TestCaseData> AddTestDataConfig()
         {
+            JsonReader jsonReader = new JsonReader();
             yield return new TestCaseData("rahulshettyacademy", "learning");
-            yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
-            yield return new TestCaseData(getDataParser().extractData("username_wrong"), getDataParser().extractData("password_wrong"));
+            yield return new TestCaseData(jsonReader.extractData("username"), jsonReader.extractData("password"));
+            yield return new TestCaseData(jsonReader.extractData("username_wrong"), jsonReader.extractData("password_wrong"));
         }
     }
 }
