@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace CSharpSeleniumExtent.src.main.net.Utilities
 {
-    public class JsonReader : InitalizeMethod
+    public class JsonReader : InitializeMethod
     {
         public JsonReader() { }
 

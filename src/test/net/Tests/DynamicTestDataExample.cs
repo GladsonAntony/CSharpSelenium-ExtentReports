@@ -19,11 +19,30 @@ namespace CSharpSeleniumExtent.src.test.net.Tests
 
 
         [TestCaseSource(nameof(ReadDataFromJSON))]
-        public void TestDynamicData(string username, string password)
+        public void TestDynamicData(String username, String password)
         {
             TestContext.WriteLine("To Demo the use of Dynamically reading the JSON Test Data and Printing the values");
             TestContext.WriteLine(username);
             TestContext.WriteLine(password);
+        }
+
+
+        public static IEnumerable<TestCaseData> ReadDataFromEXCEL()
+        {
+            ExcelReader excelReader = new ExcelReader();
+            return excelReader.ReadFromExcel("ExcelTestData", "Sheet1");
+        }
+
+
+        [TestCaseSource(nameof(ReadDataFromEXCEL))]
+        public void TestDynamicDataExcel(String Column1, String Column2, String Column3, String Column4, String Column5)
+        {
+            TestContext.WriteLine("To Demo the use of Dynamically reading the Excel Test Data and Printing the values");
+            TestContext.WriteLine(Column1);
+            TestContext.WriteLine(Column2);
+            TestContext.WriteLine(Column3);
+            TestContext.WriteLine(Column4);
+            TestContext.WriteLine(Column5);
         }
     }
 }

@@ -11,7 +11,7 @@ using CSharpSeleniumExtent.src.main.net.Utilities;
 
 namespace CSharpSeleniumFramework.src.main.net.Core
 {
-    public class Base : InitalizeMethod
+    public class Base : InitializeMethod
 
     {       
 

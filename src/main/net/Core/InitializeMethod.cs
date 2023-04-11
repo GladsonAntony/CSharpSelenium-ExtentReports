@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace CSharpSeleniumExtent.src.main.net.Core
 {
-    public class InitalizeMethod
+    public class InitializeMethod
     {
         //Initialize Thread Safe Iwebdriver Instance
         public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
