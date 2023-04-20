@@ -43,8 +43,16 @@ namespace CSharpSeleniumFramework.src.test.net.Tests
             Thread.Sleep(5000);
         }
 
+        public static IEnumerable<TestCaseData> AddTestDataConfig()
+        {
+            JsonReader jsonReader = new JsonReader();
+            yield return new TestCaseData("rahulshettyacademy", "learning");
+            yield return new TestCaseData(jsonReader.extractData("username"), jsonReader.extractData("password"));
+            yield return new TestCaseData(jsonReader.extractData("username_wrong"), jsonReader.extractData("password_wrong"));
+        }
+
+
         [TestCaseSource(nameof(AddTestDataConfig))]
-        //[Parallelizable(ParallelScope.All)]
         public void LoginPageDemo4(string username, string password)
         {
             LoginPageObjects loginPageObjects = new LoginPageObjects(GetDriver());
@@ -57,12 +65,6 @@ namespace CSharpSeleniumFramework.src.test.net.Tests
             Thread.Sleep(5000);
         }
 
-        public static IEnumerable<TestCaseData> AddTestDataConfig()
-        {
-            JsonReader jsonReader = new JsonReader();
-            yield return new TestCaseData("rahulshettyacademy", "learning");
-            yield return new TestCaseData(jsonReader.extractData("username"), jsonReader.extractData("password"));
-            yield return new TestCaseData(jsonReader.extractData("username_wrong"), jsonReader.extractData("password_wrong"));
-        }
+       
     }
 }

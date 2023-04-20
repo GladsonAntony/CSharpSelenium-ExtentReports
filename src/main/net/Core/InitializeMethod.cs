@@ -28,19 +28,6 @@ namespace CSharpSeleniumExtent.src.main.net.Core
         public static String WorkingDirectory = Environment.CurrentDirectory;
         public static String ProjectDirectory = Directory.GetParent(WorkingDirectory).Parent.Parent.FullName;
         public static String ReportPath = ProjectDirectory + "/src/test/resources/Reports/";
-        public static String TestDataPath = ProjectDirectory + "/src/test/resources/TestData/";
-
-        [Test]
-        public void randomTest()
-        {
-            TestContext.WriteLine(OSVersion);
-            TestContext.WriteLine(OSDescription);
-            TestContext.WriteLine(OSArchitecture);
-            TestContext.WriteLine(MachineName);
-            TestContext.WriteLine(WorkingDirectory);
-            TestContext.WriteLine(ProjectDirectory);
-            TestContext.WriteLine(ReportPath);
-            TestContext.WriteLine(TestDataPath);
-        }        
+        public static String TestDataPath = ProjectDirectory + "/src/test/resources/TestData/";      
     }
 }
