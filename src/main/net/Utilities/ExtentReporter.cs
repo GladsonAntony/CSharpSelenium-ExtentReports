@@ -1,13 +1,7 @@
 ﻿using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using CSharpSeleniumExtent.src.main.net.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AventStack.ExtentReports.Reporter.Configuration;
-using CSharpSeleniumFramework.src.main.net.Core;
 
 namespace CSharpSeleniumExtent.src.main.net.Utilities
 {
@@ -31,7 +25,9 @@ namespace CSharpSeleniumExtent.src.main.net.Utilities
             extentReports.AddSystemInfo("OS Description", OSDescription);
             extentReports.AddSystemInfo("OS Architecture", OSArchitecture);
         }
-        
+
+        public static void ExtentCreateTest() => extentTest = extentReports.CreateTest(TestContext.CurrentContext.Test.Name);
+
 
         public static void LogInfo(String InfoMessage)
         {

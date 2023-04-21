@@ -1,7 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
-using RazorEngine.Compilation.ImpromptuInterface;
 using System.Runtime.InteropServices;
 
 namespace CSharpSeleniumExtent.src.main.net.Core
@@ -19,6 +18,7 @@ namespace CSharpSeleniumExtent.src.main.net.Core
 
         //Initialize Extent Reports
         public static ExtentReports extentReports;
+        [ThreadStatic]
         public static ExtentTest extentTest;
         public static ExtentHtmlReporter htmlReporter;
 

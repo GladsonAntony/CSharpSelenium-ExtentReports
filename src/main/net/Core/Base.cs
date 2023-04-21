@@ -1,25 +1,20 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
 using System.Configuration;
-using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using NUnit.Framework.Interfaces;
-using CSharpSeleniumExtent.src.main.net.Core;
 using CSharpSeleniumExtent.src.main.net.Utilities;
-using NUnit.Framework;
 
 namespace CSharpSeleniumFramework.src.main.net.Core
 {
     [Author("Gladson Antony")]
+    [Description("Contains the Base Class")]
     public class Base : ExtentReporter
     {
 
         [OneTimeSetUp]
         public void OneTimeSetup() 
         {
-            SetupExtentReporting();                       
+            SetupExtentReporting();
         }
 
         [OneTimeTearDown]
@@ -31,7 +26,7 @@ namespace CSharpSeleniumFramework.src.main.net.Core
         [SetUp]
         public void SetupBrowser()
         {
-            extentTest = extentReports.CreateTest(TestContext.CurrentContext.Test.Name);
+            ExtentCreateTest();
             if (ConfigBrowserName == null)
             {
                 ConfigBrowserName = ConfigurationManager.AppSettings["Browser"];

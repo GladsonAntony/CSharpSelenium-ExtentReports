@@ -1,16 +1,9 @@
-﻿using AventStack.ExtentReports;
-using CSharpSeleniumExtent.src.main.net.Core;
-using CSharpSeleniumExtent.src.main.net.Utilities;
+﻿using CSharpSeleniumExtent.src.main.net.Utilities;
 using CSharpSeleniumFramework.src.main.net.Core;
-using CSharpSeleniumFramework.src.test.net.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpSeleniumExtent.src.test.net.Tests
 {
+    [TestFixture]
     public class DynamicTestDataExample : Base
     {
         public static IEnumerable<TestCaseData> ReadDataFromJSON()
