@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
 using RazorEngine.Compilation.ImpromptuInterface;
 using System.Runtime.InteropServices;
@@ -10,12 +11,16 @@ namespace CSharpSeleniumExtent.src.main.net.Core
         //Initialize Thread Safe Iwebdriver Instance
         public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
 
+        //Initialize Javascript Executor
+        public static IJavaScriptExecutor javaScriptExecutor;
+
         //Get the Browser Name from the App.Config File
-        public static String ConfigBrowserName;
+        public static String ConfigBrowserName = TestContext.Parameters["Browser"];
 
         //Initialize Extent Reports
         public static ExtentReports extentReports;
         public static ExtentTest extentTest;
+        public static ExtentHtmlReporter htmlReporter;
 
 
         //Get Hardware Info
@@ -28,6 +33,7 @@ namespace CSharpSeleniumExtent.src.main.net.Core
         public static String WorkingDirectory = Environment.CurrentDirectory;
         public static String ProjectDirectory = Directory.GetParent(WorkingDirectory).Parent.Parent.FullName;
         public static String ReportPath = ProjectDirectory + "/src/test/resources/Reports/";
-        public static String TestDataPath = ProjectDirectory + "/src/test/resources/TestData/";      
+        public static String TestDataPath = ProjectDirectory + "/src/test/resources/TestData/";
+        public static String ScreenshotPath = ProjectDirectory + "/src/test/resources/Screenshots/";
     }
 }

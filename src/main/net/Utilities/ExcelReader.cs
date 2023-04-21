@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using CSharpSeleniumExtent.src.main.net.Core;
@@ -11,6 +12,11 @@ namespace CSharpSeleniumExtent.src.main.net.Utilities
 {
     public class ExcelReader : InitializeMethod
     {
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("maccatalyst")]
         public IEnumerable<TestCaseData> ReadFromExcel(String excelFileName, String excelsheetName)
         {
             string excelLocation = Path.Combine(TestDataPath + excelFileName + ".xlsx");

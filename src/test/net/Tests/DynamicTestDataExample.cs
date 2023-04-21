@@ -26,9 +26,9 @@ namespace CSharpSeleniumExtent.src.test.net.Tests
         {
             TestContext.WriteLine("To Demo the use of Dynamically reading the JSON Test Data and Printing the values");
             TestContext.WriteLine(username);
-            ExtentReporter.LogInfo($"Provided Username : {username}");
+            //LogInfo($"Provided Username : {username}");
             TestContext.WriteLine(password);
-            ExtentReporter.LogInfo($"Provided Password : {password}");
+            //LogInfo($"Provided Password : {password}");
         }
 
 

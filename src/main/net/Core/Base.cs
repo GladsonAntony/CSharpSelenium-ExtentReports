@@ -8,28 +8,30 @@ using AventStack.ExtentReports;
 using NUnit.Framework.Interfaces;
 using CSharpSeleniumExtent.src.main.net.Core;
 using CSharpSeleniumExtent.src.main.net.Utilities;
+using NUnit.Framework;
 
 namespace CSharpSeleniumFramework.src.main.net.Core
 {
+    [Author("Gladson Antony")]
     public class Base : ExtentReporter
-
-    {       
+    {
 
         [OneTimeSetUp]
-        public void Setup()
-        {            
-            var HtmlReporter = new ExtentHtmlReporter(ReportPath);
-            extentReports = new ExtentReports();
-            extentReports.AttachReporter(HtmlReporter);
-            extentReports.AddSystemInfo("Username", "Gladson Antony");
+        public void OneTimeSetup() 
+        {
+            SetupExtentReporting();                       
         }
 
+        [OneTimeTearDown]
+        public void OneTimeTeardown() 
+        {
+            EndExtentReporting();
+        }
 
         [SetUp]
         public void SetupBrowser()
         {
             extentTest = extentReports.CreateTest(TestContext.CurrentContext.Test.Name);
-            ConfigBrowserName = TestContext.Parameters["Browser"];
             if (ConfigBrowserName == null)
             {
                 ConfigBrowserName = ConfigurationManager.AppSettings["Browser"];
@@ -41,103 +43,22 @@ namespace CSharpSeleniumFramework.src.main.net.Core
             TestContext.WriteLine("Title of the Webpage " + driver.Value.Title);
         }
 
-        public void InitBrowser(string BrowserName)
+
+        public MediaEntityModelProvider CaptureScreenShotASBase64(IWebDriver driver, string ScreenshotName)
         {
-            switch (BrowserName.ToLower())
-            {
-                case "firefox":
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower().Equals("true"))
-                    {
-                        FirefoxOptions firefoxOptions = new FirefoxOptions();
-                        firefoxOptions.AddArguments("--headless");
-                        driver.Value = new FirefoxDriver(firefoxOptions);
-                    }
-                    else
-                    {
-                        driver.Value = new FirefoxDriver();
-                    }
-                    break;
-
-                case "edge":
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
-                    {
-                        EdgeOptions edgeOptions = new EdgeOptions();
-                        edgeOptions.AddArguments("--headless");
-                        driver.Value = new EdgeDriver(edgeOptions);
-                    }
-                    else
-                    {
-                        driver.Value = new EdgeDriver();
-                    }
-                    break;
-
-                case "chrome":
-                    
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.AddArguments("--headless");
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    else
-                    {
-                        driver.Value = new ChromeDriver();
-                    }
-                    break;
-
-                case "brave":                    
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.AddArguments("--headless");
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["BravePath"];
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    else
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["BravePath"];
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    break;
-
-                case "opera":
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["OperaPath"];
-                        chromeOptions.AddArguments("--headless");
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    else
-                    {                         
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["OperaPath"];
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    break;
-
-                case "chromium":
-                    if (ConfigurationManager.AppSettings["Headless"].ToLower() == "true")
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["ChromiumPath"];
-                        chromeOptions.AddArguments("--headless");
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    else
-                    {
-                        ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.BinaryLocation = ConfigurationManager.AppSettings["ChromiumPath"];
-                        driver.Value = new ChromeDriver(chromeOptions);
-                    }
-                    break;
-            }
+            ITakesScreenshot screenshot = (ITakesScreenshot)driver;
+            var CapturedScreenshot = screenshot.GetScreenshot().AsBase64EncodedString;
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(CapturedScreenshot, ScreenshotName).Build();
         }
 
-        public IWebDriver GetDriver()
+        public static string CaptureScreenShot(IWebDriver driver, string ScreenshotName)
         {
-            return driver.Value;
+            ITakesScreenshot screenshot = (ITakesScreenshot)driver;
+            Screenshot screenshot1 = screenshot.GetScreenshot();
+            var localpath = ScreenshotPath + ScreenshotName;
+            var finalpath = new Uri(localpath).LocalPath;
+            screenshot1.SaveAsFile(ScreenshotPath, ScreenshotImageFormat.Png);
+            return finalpath;
         }
 
 
@@ -152,22 +73,19 @@ namespace CSharpSeleniumFramework.src.main.net.Core
 
             if (Status == TestStatus.Failed)
             {
-                extentTest.Fail("Test Failed", CaptureScreenShot(driver.Value, fileName));
+                extentTest.Fail("Test Failed", CaptureScreenShotASBase64(GetDriver(), fileName));
+                CaptureScreenShot(GetDriver(), TestContext.CurrentContext.Test.Name);
                 extentTest.Log(AventStack.ExtentReports.Status.Fail, "Test Failed with Logtrace" + StackTrace);
             }
             else if (Status == TestStatus.Passed)
             {
                 extentTest.Pass("Test Passed");
             }
-            extentReports.Flush();
-            driver.Value.Quit();
-        }
-
-        public MediaEntityModelProvider CaptureScreenShot(IWebDriver driver, string ScreenshotName)
-        {
-            ITakesScreenshot screenshot = (ITakesScreenshot)driver;
-            var CapturedScreenshot = screenshot.GetScreenshot().AsBase64EncodedString;
-            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(CapturedScreenshot, ScreenshotName).Build();
+            else if (Status == TestStatus.Skipped)
+            {
+                extentTest.Skip("Test Skipped");
+            }
+            GetDriver().Quit();
         }
     }
 }

@@ -1,18 +1,37 @@
-﻿using CSharpSeleniumExtent.src.main.net.Core;
+﻿using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports;
+using CSharpSeleniumExtent.src.main.net.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AventStack.ExtentReports.Reporter.Configuration;
+using CSharpSeleniumFramework.src.main.net.Core;
 
 namespace CSharpSeleniumExtent.src.main.net.Utilities
 {
-    public class ExtentReporter : InitializeMethod
+    public class ExtentReporter : BrowserFactory
     {
-        public static void EndExtentReporting()
+        public static void SetupExtentReporting()
         {
-            extentReports.Flush();
+            htmlReporter = new ExtentHtmlReporter(ReportPath);
+            htmlReporter.Config.ReportName = "Extent Report - Selenium-NUnit";
+            htmlReporter.Config.Theme = Theme.Dark;
+            htmlReporter.Config.Encoding = "utf-8";
+            htmlReporter.Config.CSS = "css-string";
+            htmlReporter.Config.DocumentTitle = "Extent Report - Selenium-NUnit";
+            htmlReporter.Config.EnableTimeline = true;
+            htmlReporter.Config.JS = "js-string";
+            extentReports = new ExtentReports();
+            extentReports.AttachReporter(htmlReporter);
+            extentReports.AddSystemInfo("Username", "Gladson Antony");
+            extentReports.AddSystemInfo("Machine Name", MachineName);
+            extentReports.AddSystemInfo("OS Version", OSVersion);
+            extentReports.AddSystemInfo("OS Description", OSDescription);
+            extentReports.AddSystemInfo("OS Architecture", OSArchitecture);
         }
+        
 
         public static void LogInfo(String InfoMessage)
         {
@@ -27,6 +46,11 @@ namespace CSharpSeleniumExtent.src.main.net.Utilities
         public static void LogFail(String FailMessage)
         {
             extentTest.Fail(FailMessage);
+        }
+
+        public static void EndExtentReporting()
+        {
+            extentReports.Flush();
         }
     }
 }
